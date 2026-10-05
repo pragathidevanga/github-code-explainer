@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import html
-import os
 import re
 import sys
 from pathlib import Path
@@ -28,7 +27,11 @@ st.set_page_config(
 )
 apply_styles(st)
 
-API_URL = os.getenv("API_BASE_URL", "http://127.0.0.1:8000").rstrip("/") + "/api/analyze"
+BACKEND_URL = st.secrets.get(
+    "BACKEND_URL",
+    "http://127.0.0.1:8000"
+)
+API_URL = BACKEND_URL.rstrip("/") + "/api/analyze"
 PROGRESS_STEPS = [
     "Validating repository",
     "Cloning repository",
